@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sports & Media — আন্তর্জাতিক ক্রিকেট ও ফুটবল রেকর্ড</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Bebas+Neue&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07080a;
+  --surface: #0e1012;
+  --card: #14171a;
+  --card2: #191d21;
+  --border: #262b30;
+  --cricket: #22c55e;
+  --cricket-dim: #15803d;
+  --football: #2e7df6;
+  --football-dim: #1e4fa3;
+  --gold: #ffd60a;
+  --silver: #c9ced6;
+  --bronze: #d98b4a;
+  --text: #f2f3f5;
+  --muted: #888f99;
+  --muted2: #5b6168;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Hind Siliguri',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:99px}
+
+/* ── টেক্সচার ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.4;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  padding:64px 20px 0;
+  text-align:center;
+  overflow:hidden;
+  background:radial-gradient(ellipse 120% 80% at 50% 0%, #0f2818 0%, var(--bg) 65%);
+}
+.hero-stitch{
+  position:absolute;top:0;left:0;right:0;height:4px;
+  background:repeating-linear-gradient(90deg,var(--gold) 0 16px,transparent 16px 28px);
+  opacity:0.5;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:14px;
+  animation:fadeUp 0.6s ease both;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:24px;height:1px;background:var(--gold);opacity:0.5}
+h1{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(2.6rem,9vw,5rem);
+  letter-spacing:2px;line-height:0.95;
+  background:linear-gradient(180deg,#ffffff 0%,#c7cdd6 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:fadeUp 0.6s ease 0.1s both;
+}
+.hero-sub{
+  color:var(--muted);font-size:0.92rem;margin-top:14px;
+  max-width:480px;margin-left:auto;margin-right:auto;
+  animation:fadeUp 0.6s ease 0.2s both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* স্কোরবোর্ড টিকার */
+.scoreboard{
+  margin-top:36px;display:flex;justify-content:center;gap:0;
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;max-width:560px;margin-left:auto;margin-right:auto;
+  animation:fadeUp 0.6s ease 0.3s both;
+}
+.scoreboard-cell{
+  flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border);
+}
+.scoreboard-cell:last-child{border-right:none}
+.scoreboard-num{font-family:'Teko',sans-serif;font-size:1.6rem;font-weight:700;color:var(--gold)}
+.scoreboard-label{font-size:0.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+/* ── ক্যাটাগরি ট্যাব (স্টিকি) ── */
+.tab-bar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,8,10,0.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:14px 16px;margin-top:48px;
+}
+.cat-tabs{
+  display:flex;gap:8px;justify-content:center;max-width:420px;margin:0 auto;
+}
+.cat-tab{
+  flex:1;padding:11px 18px;border-radius:11px;
+  background:transparent;border:1.5px solid var(--border);
+  color:var(--muted);font-weight:700;cursor:pointer;
+  font-family:'Hind Siliguri',sans-serif;font-size:0.88rem;
+  transition:all 0.25s cubic-bezier(.2,.8,.2,1);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.cat-tab.active.cricket{background:linear-gradient(135deg,var(--cricket),var(--cricket-dim));border-color:var(--cricket);color:#fff;box-shadow:0 4px 16px rgba(34,197,94,0.25)}
+.cat-tab.active.football{background:linear-gradient(135deg,var(--football),var(--football-dim));border-color:var(--football);color:#fff;box-shadow:0 4px 16px rgba(46,125,246,0.25)}
+
+.container{max-width:980px;margin:0 auto;padding:30px 16px 10px;position:relative;z-index:1}
+.cat-section{display:none}
+.cat-section.active{display:block;animation:fadeIn 0.45s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* সাব-ন্যাভ চিপ (কুইক জাম্প) */
+.subnav{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:28px;scrollbar-width:none}
+.subnav::-webkit-scrollbar{display:none}
+.subnav-chip{
+  flex-shrink:0;padding:7px 14px;border-radius:99px;font-size:0.76rem;font-weight:600;
+  background:var(--card);border:1px solid var(--border);color:var(--muted);
+  cursor:pointer;white-space:nowrap;transition:all 0.2s;text-decoration:none;
+}
+.cat-section.cricket .subnav-chip:hover{border-color:var(--cricket);color:var(--cricket)}
+.cat-section.football .subnav-chip:hover{border-color:var(--football);color:var(--football)}
+
+h2{
+  font-family:'Bebas Neue',cursive;
+  font-size:1.7rem;letter-spacing:1px;
+  margin-top:44px;margin-bottom:6px;
+  display:flex;align-items:center;gap:10px;
+  scroll-margin-top:90px;
+}
+.cat-section.cricket h2{color:var(--cricket)}
+.cat-section.football h2{color:var(--football)}
+.h2-icon{
+  width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
+}
+.cat-section.cricket .h2-icon{background:rgba(34,197,94,0.12)}
+.cat-section.football .h2-icon{background:rgba(46,125,246,0.12)}
+.h2-sub{font-size:0.74rem;color:var(--muted2);font-family:'Hind Siliguri',sans-serif;font-weight:500;margin-bottom:18px;letter-spacing:0.3px}
+
+/* ── টুর্নামেন্ট/শিডিউল গ্রিড ── */
+.tourney-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));
+  gap:12px;margin-bottom:14px;
+}
+.tourney-card{
+  position:relative;
+  background:linear-gradient(155deg,var(--card2),var(--card));
+  border:1.5px solid var(--border);
+  border-radius:16px;padding:20px 12px 16px;text-align:center;
+  cursor:pointer;transition:all 0.25s cubic-bezier(.2,.8,.2,1);
+  overflow:hidden;
+}
+.tourney-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transition:transform 0.3s ease;
+}
+.cat-section.cricket .tourney-card::before{background:var(--cricket)}
+.cat-section.football .tourney-card::before{background:var(--football)}
+.tourney-card:hover::before{transform:scaleX(1)}
+.tourney-card:hover{transform:translateY(-5px)}
+.cat-section.cricket .tourney-card:hover{border-color:var(--cricket);box-shadow:0 10px 28px rgba(34,197,94,0.15)}
+.cat-section.football .tourney-card:hover{border-color:var(--football);box-shadow:0 10px 28px rgba(46,125,246,0.15)}
+.tourney-icon{font-size:2.1rem;margin-bottom:8px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4))}
+.tourney-name{font-size:0.82rem;font-weight:700}
+.tourney-sub{font-size:0.67rem;color:var(--muted);margin-top:3px}
+.live-dot{
+  position:absolute;top:10px;right:10px;width:7px;height:7px;border-radius:50%;
+  background:#ef4444;box-shadow:0 0 0 0 rgba(239,68,68,0.6);
+  animation:pulse-dot 1.6s ease infinite;
+}
+@keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.6)}70%{box-shadow:0 0 0 7px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+
+.schedule-embed{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;margin-bottom:24px;overflow:hidden;
+  max-height:0;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease;
+}
+.schedule-embed.show{max-height:640px;opacity:1}
+.schedule-embed iframe{width:100%;border:0;display:block}
+.schedule-embed-header{
+  padding:13px 18px;background:var(--card2);
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.schedule-embed-title{font-weight:700;font-size:0.86rem;display:flex;align-items:center;gap:8px}
+.schedule-close{
+  cursor:pointer;color:var(--muted);font-size:0.78rem;font-weight:600;
+  background:var(--border);border:none;border-radius:8px;padding:5px 11px;
+  font-family:inherit;transition:all 0.2s;
+}
+.schedule-close:hover{color:var(--text);background:var(--muted2)}
+
+/* ── লিডারবোর্ড (নতুন কার্ড-স্টাইল রেকর্ড টেবিল) ── */
+.leaderboard{display:flex;flex-direction:column;gap:8px;margin-bottom:6px}
+.lb-row{
+  display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:14px;
+  background:var(--card);border:1px solid var(--border);border-radius:13px;
+  padding:11px 16px;transition:all 0.2s;position:relative;overflow:hidden;
+}
+.lb-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;
+}
+.cat-section.cricket .lb-row:hover{border-color:rgba(34,197,94,0.4);background:var(--card2)}
+.cat-section.football .lb-row:hover{border-color:rgba(46,125,246,0.4);background:var(--card2)}
+.lb-row.r1::before{background:var(--gold)}
+.lb-row.r2::before{background:var(--silver)}
+.lb-row.r3::before{background:var(--bronze)}
+
+.lb-rank{
+  font-family:'Teko',sans-serif;font-size:1.5rem;font-weight:700;
+  color:var(--muted2);text-align:center;
+}
+.lb-row.r1 .lb-rank{color:var(--gold);font-size:1.7rem}
+.lb-row.r2 .lb-rank{color:var(--silver);font-size:1.6rem}
+.lb-row.r3 .lb-rank{color:var(--bronze);font-size:1.6rem}
+
+.lb-info{min-width:0}
+.lb-name{font-weight:700;font-size:0.9rem;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.lb-flag{font-size:1rem}
+.lb-country{font-size:0.74rem;color:var(--muted);margin-top:1px}
+.lb-detail{font-size:0.74rem;color:var(--muted);margin-top:2px;line-height:1.5}
+
+.lb-stat{text-align:right;flex-shrink:0}
+.lb-stat-num{font-family:'Teko',sans-serif;font-size:1.45rem;font-weight:700;line-height:1}
+.cat-section.cricket .lb-stat-num{color:var(--cricket)}
+.cat-section.football .lb-stat-num{color:var(--football)}
+.lb-stat-label{font-size:0.62rem;color:var(--muted2);text-transform:uppercase;letter-spacing:0.5px}
+
+.live-link{
+  display:inline-flex;align-items:center;gap:6px;margin:14px 0 8px;
+  font-size:0.78rem;font-weight:600;color:var(--muted);
+  background:var(--card);border:1px solid var(--border);
+  border-radius:99px;padding:8px 16px;
+  text-decoration:none;transition:all 0.2s;
+}
+.cat-section.cricket .live-link:hover{border-color:var(--cricket);color:var(--cricket);background:rgba(34,197,94,0.06)}
+.cat-section.football .live-link:hover{border-color:var(--football);color:var(--football);background:rgba(46,125,246,0.06)}
+
+/* ── ফিল্টার/সার্চ টুল ── */
+.tools-bar{
+  display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;
+}
+.search-box{
+  flex:1;min-width:180px;position:relative;
+}
+.search-box input{
+  width:100%;padding:10px 14px 10px 36px;
+  background:var(--card);border:1.5px solid var(--border);border-radius:11px;
+  color:var(--text);font-size:0.85rem;font-family:'Hind Siliguri',sans-serif;
+  outline:none;transition:border-color 0.2s;
+}
+.cat-section.cricket .search-box input:focus{border-color:var(--cricket)}
+.cat-section.football .search-box input:focus{border-color:var(--football)}
+.search-box::before{
+  content:'🔍';position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  font-size:0.8rem;opacity:0.5;pointer-events:none;
+}
+.sort-select{
+  padding:10px 14px;background:var(--card);border:1.5px solid var(--border);
+  border-radius:11px;color:var(--text);font-size:0.82rem;font-family:'Hind Siliguri',sans-serif;
+  cursor:pointer;outline:none;
+}
+
+footer{
+  text-align:center;padding:36px 20px;color:var(--muted);
+  font-size:0.78rem;border-top:1px solid var(--border);margin-top:50px;
+  line-height:1.9;position:relative;z-index:1;
+}
+footer strong{color:var(--text)}
+
+@media(max-width:480px){
+  .lb-row{grid-template-columns:38px 1fr auto;padding:10px 12px;gap:10px}
+  .lb-rank{font-size:1.3rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-stitch"></div>
+  <div class="hero-eyebrow">RECORD BOOK · বিশ্বের সেরা পরিসংখ্যান</div>
+  <h1>SPORTS &amp; MEDIA</h1>
+  <p class="hero-sub">আন্তর্জাতিক ক্রিকেট ও ফুটবলের সর্বকালের সেরা রেকর্ড, লাইভ শিডিউল এবং স্কোর — এক জায়গায়।</p>
+
+  <div class="scoreboard">
+    <div class="scoreboard-cell"><div class="scoreboard-num">36</div><div class="scoreboard-label">রেকর্ড টেবিল</div></div>
+    <div class="scoreboard-cell"><div class="scoreboard-num">10</div><div class="scoreboard-label">শিডিউল সোর্স</div></div>
+    <div class="scoreboard-cell"><div class="scoreboard-num">2</div><div class="scoreboard-label">খেলার ধরন</div></div>
+    <div class="scoreboard-cell"><div class="scoreboard-num">LIVE</div><div class="scoreboard-label">স্কোর লিংক</div></div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <div class="cat-tabs">
+    <button class="cat-tab cricket active" onclick="showCat('cricket', this)">🏏 ক্রিকেট</button>
+    <button class="cat-tab football" onclick="showCat('football', this)">⚽ ফুটবল</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ক্রিকেট সেকশন -->
+  <div class="cat-section cricket active" id="cricket-section">
+
+    <div class="subnav">
+      <a class="subnav-chip" href="#c-schedule">📅 শিডিউল</a>
+      <a class="subnav-chip" href="#c-odi-runs">ODI রান</a>
+      <a class="subnav-chip" href="#c-odi-wkt">ODI উইকেট</a>
+      <a class="subnav-chip" href="#c-t20-runs">T20I রান</a>
+      <a class="subnav-chip" href="#c-t20-wkt">T20I উইকেট</a>
+      <a class="subnav-chip" href="#c-test-runs">Test রান</a>
+      <a class="subnav-chip" href="#c-test-wkt">Test উইকেট</a>
+    </div>
+
+    <h2 id="c-schedule"><span class="h2-icon">📅</span>সূচি ও লাইভ স্কোর</h2>
+    <div class="h2-sub">যেকোনো কার্ডে ক্লিক করলে সরাসরি লাইভ ডেটা দেখুন</div>
+    <div class="tourney-grid">
+      <div class="tourney-card cricket-c" onclick="openSchedule('cricket','https://www.espncricinfo.com/live-cricket-score','ESPN Cricinfo — লাইভ স্কোর')">
+        <div class="live-dot"></div>
+        <div class="tourney-icon">🔴</div>
+        <div class="tourney-name">লাইভ স্কোর</div>
+        <div class="tourney-sub">সব চলমান ম্যাচ</div>
+      </div>
+      <div class="tourney-card cricket-c" onclick="openSchedule('cricket','https://www.espncricinfo.com/series','আন্তর্জাতিক ক্রিকেট সূচি')">
+        <div class="tourney-icon">🏏</div>
+        <div class="tourney-name">আন্তর্জাতিক সূচি</div>
+        <div class="tourney-sub">সব দেশের আসন্ন ম্যাচ</div>
+      </div>
+      <div class="tourney-card cricket-c" onclick="openSchedule('cricket','https://www.icc-cricket.com/rankings/mens/team-rankings/odi','ICC ক্রমতালিকা')">
+        <div class="tourney-icon">🏆</div>
+        <div class="tourney-name">ICC র‍্যাঙ্কিং</div>
+        <div class="tourney-sub">দলের অবস্থান</div>
+      </div>
+      <div class="tourney-card cricket-c" onclick="openSchedule('cricket','https://www.iplt20.com/matches/schedule','IPL শিডিউল')">
+        <div class="tourney-icon">🟠</div>
+        <div class="tourney-name">IPL</div>
+        <div class="tourney-sub">ইন্ডিয়ান প্রিমিয়ার লিগ</div>
+      </div>
+      <div class="tourney-card cricket-c" onclick="openSchedule('cricket','https://www.espncricinfo.com/team/bangladesh-25','বাংলাদেশ ক্রিকেট সূচি')">
+        <div class="tourney-icon">🇧🇩</div>
+        <div class="tourney-name">বাংলাদেশ</div>
+        <div class="tourney-sub">টাইগারদের সূচি</div>
+      </div>
+    </div>
+
+    <div class="schedule-embed" id="cricket-embed">
+      <div class="schedule-embed-header">
+        <div class="schedule-embed-title" id="cricket-embed-title">শিডিউল</div>
+        <button class="schedule-close" onclick="closeSchedule('cricket')">✕ বন্ধ করুন</button>
+      </div>
+      <iframe id="cricket-iframe" src="" height="600" loading="lazy"></iframe>
+    </div>
+
+    <div class="tools-bar">
+      <div class="search-box"><input type="text" placeholder="খেলোয়াড়ের নাম খুঁজুন..." oninput="filterPlayers(this,'cricket-section')"></div>
+    </div>
+
+    <h2 id="c-odi-runs"><span class="h2-icon">🏏</span>ODI রান সংগ্রাহক</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Sachin Tendulkar<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">18,426</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Virat Kohli<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">14,390+</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Kumar Sangakkara<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">14,234</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Ricky Ponting<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">13,704</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Sanath Jayasuriya<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">13,430</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Mahela Jayawardene<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">12,650</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Inzamam-ul-Haq<span class="lb-flag">🇵🇰</span></div><div class="lb-country">পাকিস্তান</div></div><div class="lb-stat"><div class="lb-stat-num">11,739</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Jacques Kallis<span class="lb-flag">🇿🇦</span></div><div class="lb-country">দক্ষিণ আফ্রিকা</div></div><div class="lb-stat"><div class="lb-stat-num">11,579</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Rohit Sharma<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">11,427+</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Sourav Ganguly<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">11,363</div><div class="lb-stat-label">রান</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.espncricinfo.com/records/most-runs-in-career-223646" target="_blank">🔴 সর্বশেষ আপডেট — ESPN Cricinfo →</a>
+
+    <h2 id="c-odi-wkt"><span class="h2-icon">🎯</span>ODI উইকেট শিকারী</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Muttiah Muralitharan<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">534</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Wasim Akram<span class="lb-flag">🇵🇰</span></div><div class="lb-country">পাকিস্তান</div></div><div class="lb-stat"><div class="lb-stat-num">502</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Waqar Younis<span class="lb-flag">🇵🇰</span></div><div class="lb-country">পাকিস্তান</div></div><div class="lb-stat"><div class="lb-stat-num">416</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Chaminda Vaas<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">400</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Shahid Afridi<span class="lb-flag">🇵🇰</span></div><div class="lb-country">পাকিস্তান</div></div><div class="lb-stat"><div class="lb-stat-num">395</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Shaun Pollock<span class="lb-flag">🇿🇦</span></div><div class="lb-country">দক্ষিণ আফ্রিকা</div></div><div class="lb-stat"><div class="lb-stat-num">393</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Glenn McGrath<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">381</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Brett Lee<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">380</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Lasith Malinga<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">338</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Anil Kumble<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">337</div><div class="lb-stat-label">উইকেট</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.espncricinfo.com/records/most-wickets-in-career-223646" target="_blank">🔴 সর্বশেষ আপডেট — ESPN Cricinfo →</a>
+
+    <h2 id="c-t20-runs"><span class="h2-icon">🏏</span>T20I রান সংগ্রাহক</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Babar Azam<span class="lb-flag">🇵🇰</span></div><div class="lb-country">পাকিস্তান</div></div><div class="lb-stat"><div class="lb-stat-num">4,596</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Rohit Sharma<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">4,231</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Virat Kohli<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">4,188</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Jos Buttler<span class="lb-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div><div class="lb-country">ইংল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">4,037</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Paul Stirling<span class="lb-flag">🇮🇪</span></div><div class="lb-country">আয়ারল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">3,895</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Martin Guptill<span class="lb-flag">🇳🇿</span></div><div class="lb-country">নিউজিল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">3,531</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Mohammad Rizwan<span class="lb-flag">🇵🇰</span></div><div class="lb-country">পাকিস্তান</div></div><div class="lb-stat"><div class="lb-stat-num">3,414</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">David Warner<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">3,277</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Suryakumar Yadav<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">3,272</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Aaron Finch<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">3,120</div><div class="lb-stat-label">রান</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.espncricinfo.com/records/most-runs-in-career-227834" target="_blank">🔴 সর্বশেষ আপডেট — ESPN Cricinfo →</a>
+
+    <h2 id="c-t20-wkt"><span class="h2-icon">🎯</span>T20I উইকেট শিকারী</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Rashid Khan<span class="lb-flag">🇦🇫</span></div><div class="lb-country">আফগানিস্তান</div></div><div class="lb-stat"><div class="lb-stat-num">193</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Ish Sodhi<span class="lb-flag">🇳🇿</span></div><div class="lb-country">নিউজিল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">165</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Tim Southee<span class="lb-flag">🇳🇿</span></div><div class="lb-country">নিউজিল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">164</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Adil Rashid<span class="lb-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div><div class="lb-country">ইংল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">162</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Shakib Al Hasan<span class="lb-flag">🇧🇩</span></div><div class="lb-country">বাংলাদেশ</div></div><div class="lb-stat"><div class="lb-stat-num">148</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Lasith Malinga<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">107</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Mustafizur Rahman<span class="lb-flag">🇧🇩</span></div><div class="lb-country">বাংলাদেশ</div></div><div class="lb-stat"><div class="lb-stat-num">106+</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Mitchell Santner<span class="lb-flag">🇳🇿</span></div><div class="lb-country">নিউজিল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">105+</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Bhuvneshwar Kumar<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">92+</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Dwayne Bravo<span class="lb-flag">🇼🇸</span></div><div class="lb-country">ওয়েস্ট ইন্ডিজ</div></div><div class="lb-stat"><div class="lb-stat-num">78</div><div class="lb-stat-label">উইকেট</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.espncricinfo.com/records/most-wickets-in-career-227834" target="_blank">🔴 সর্বশেষ আপডেট — ESPN Cricinfo →</a>
+
+    <h2 id="c-test-runs"><span class="h2-icon">🏏</span>Test রান সংগ্রাহক</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Sachin Tendulkar<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">15,921</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Joe Root<span class="lb-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div><div class="lb-country">ইংল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">13,952+</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Ricky Ponting<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">13,378</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Jacques Kallis<span class="lb-flag">🇿🇦</span></div><div class="lb-country">দক্ষিণ আফ্রিকা</div></div><div class="lb-stat"><div class="lb-stat-num">13,289</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Rahul Dravid<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">13,288</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Alastair Cook<span class="lb-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div><div class="lb-country">ইংল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">12,472</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Kumar Sangakkara<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">12,400</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Brian Lara<span class="lb-flag">🇼🇸</span></div><div class="lb-country">ওয়েস্ট ইন্ডিজ</div></div><div class="lb-stat"><div class="lb-stat-num">11,953</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Shivnarine Chanderpaul<span class="lb-flag">🇼🇸</span></div><div class="lb-country">ওয়েস্ট ইন্ডিজ</div></div><div class="lb-stat"><div class="lb-stat-num">11,867</div><div class="lb-stat-label">রান</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Mahela Jayawardene<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">11,814</div><div class="lb-stat-label">রান</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.espncricinfo.com/records/most-runs-in-career-223646" target="_blank">🔴 সর্বশেষ আপডেট — ESPN Cricinfo →</a>
+
+    <h2 id="c-test-wkt"><span class="h2-icon">🎯</span>Test উইকেট শিকারী</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Muttiah Muralitharan<span class="lb-flag">🇱🇰</span></div><div class="lb-country">শ্রীলঙ্কা</div></div><div class="lb-stat"><div class="lb-stat-num">800</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Shane Warne<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">708</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">James Anderson<span class="lb-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div><div class="lb-country">ইংল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">704</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Anil Kumble<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">619</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Stuart Broad<span class="lb-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div><div class="lb-country">ইংল্যান্ড</div></div><div class="lb-stat"><div class="lb-stat-num">604</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Nathan Lyon<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">567+</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Glenn McGrath<span class="lb-flag">🇦🇺</span></div><div class="lb-country">অস্ট্রেলিয়া</div></div><div class="lb-stat"><div class="lb-stat-num">563</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Ravichandran Ashwin<span class="lb-flag">🇮🇳</span></div><div class="lb-country">ভারত</div></div><div class="lb-stat"><div class="lb-stat-num">537</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Courtney Walsh<span class="lb-flag">🇼🇸</span></div><div class="lb-country">ওয়েস্ট ইন্ডিজ</div></div><div class="lb-stat"><div class="lb-stat-num">519</div><div class="lb-stat-label">উইকেট</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Dale Steyn<span class="lb-flag">🇿🇦</span></div><div class="lb-country">দক্ষিন আফ্রিকা</div></div><div class="lb-stat"><div class="lb-stat-num">439</div><div class="lb-stat-label">উইকেট</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.espncricinfo.com/records/most-wickets-in-career-223646" target="_blank">🔴 সর্বশেষ আপডেট — ESPN Cricinfo →</a>
+  </div>
+
+  <!-- ফুটবল সেকশন -->
+  <div class="cat-section football" id="football-section">
+
+    <div class="subnav">
+      <a class="subnav-chip" href="#f-schedule">📅 শিডিউল</a>
+      <a class="subnav-chip" href="#f-goat">সেরা ১০</a>
+      <a class="subnav-chip" href="#f-wc">বিশ্বকাপ গোল</a>
+      <a class="subnav-chip" href="#f-club">ক্লাব গোল</a>
+    </div>
+
+    <h2 id="f-schedule"><span class="h2-icon">📅</span>সূচি ও লাইভ স্কোর</h2>
+    <div class="h2-sub">যেকোনো কার্ডে ক্লিক করলে সরাসরি লাইভ ডেটা দেখুন</div>
+    <div class="tourney-grid">
+      <div class="tourney-card football-c" onclick="openSchedule('football','https://www.fotmob.com/','FotMob — লাইভ স্কোর')">
+        <div class="live-dot"></div>
+        <div class="tourney-icon">🔴</div>
+        <div class="tourney-name">লাইভ স্কোর</div>
+        <div class="tourney-sub">সব চলমান ম্যাচ</div>
+      </div>
+      <div class="tourney-card football-c" onclick="openSchedule('football','https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup','FIFA বিশ্বকাপ ২০২৬')">
+        <div class="tourney-icon">🏆</div>
+        <div class="tourney-name">FIFA বিশ্বকাপ</div>
+        <div class="tourney-sub">২০২৬ সূচি ও আপডেট</div>
+      </div>
+      <div class="tourney-card football-c" onclick="openSchedule('football','https://www.premierleague.com/fixtures','প্রিমিয়ার লিগ')">
+        <div class="tourney-icon">⚽</div>
+        <div class="tourney-name">প্রিমিয়ার লিগ</div>
+        <div class="tourney-sub">ইংলিশ ফুটবল</div>
+      </div>
+      <div class="tourney-card football-c" onclick="openSchedule('football','https://www.laliga.com/en-GB/laliga-easports/calendar','লা লিগা')">
+        <div class="tourney-icon">🇪🇸</div>
+        <div class="tourney-name">লা লিগা</div>
+        <div class="tourney-sub">স্প্যানিশ ফুটবল</div>
+      </div>
+      <div class="tourney-card football-c" onclick="openSchedule('football','https://www.uefa.com/uefachampionsleague/fixtures-results/','চ্যাম্পিয়নস লিগ')">
+        <div class="tourney-icon">⭐</div>
+        <div class="tourney-name">চ্যাম্পিয়নস লিগ</div>
+        <div class="tourney-sub">UEFA টুর্নামেন্ট</div>
+      </div>
+    </div>
+
+    <div class="schedule-embed" id="football-embed">
+      <div class="schedule-embed-header">
+        <div class="schedule-embed-title" id="football-embed-title">শিডিউল</div>
+        <button class="schedule-close" onclick="closeSchedule('football')">✕ বন্ধ করুন</button>
+      </div>
+      <iframe id="football-iframe" src="" height="600" loading="lazy"></iframe>
+    </div>
+
+    <div class="tools-bar">
+      <div class="search-box"><input type="text" placeholder="খেলোয়াড়ের নাম খুঁজুন..." oninput="filterPlayers(this,'football-section')"></div>
+    </div>
+
+    <h2 id="f-goat"><span class="h2-icon">🌟</span>বিশ্বসেরা ১০ জন (সর্বকালের)</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Lionel Messi<span class="lb-flag">🇦🇷</span></div><div class="lb-detail">৮ বার ব্যালন ডি'অর, ২০২২ বিশ্বকাপজয়ী</div></div><div class="lb-stat"><div class="lb-stat-num">GOAT</div><div class="lb-stat-label">আর্জেন্টিনা</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Cristiano Ronaldo<span class="lb-flag">🇵🇹</span></div><div class="lb-detail">৫ বার ব্যালন ডি'অর, সর্বোচ্চ আন্তর্জাতিক গোল</div></div><div class="lb-stat"><div class="lb-stat-num">130+</div><div class="lb-stat-label">পর্তুগাল</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Pelé<span class="lb-flag">🇧🇷</span></div><div class="lb-detail">৩ বার বিশ্বকাপজয়ী (১৯৫৮, ৬২, ৭০)</div></div><div class="lb-stat"><div class="lb-stat-num">×3</div><div class="lb-stat-label">ব্রাজিল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Diego Maradona<span class="lb-flag">🇦🇷</span></div><div class="lb-detail">১৯৮৬ বিশ্বকাপজয়ী, "হ্যান্ড অফ গড"</div></div><div class="lb-stat"><div class="lb-stat-num">'86</div><div class="lb-stat-label">আর্জেন্টিনা</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Johan Cruyff<span class="lb-flag">🇳🇱</span></div><div class="lb-detail">টোটাল ফুটবলের জনক, ৩ বার ব্যালন ডি'অর</div></div><div class="lb-stat"><div class="lb-stat-num">×3</div><div class="lb-stat-label">নেদারল্যান্ডস</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Zinedine Zidane<span class="lb-flag">🇫🇷</span></div><div class="lb-detail">১৯৯৮ বিশ্বকাপজয়ী, ব্যালন ডি'অর বিজয়ী</div></div><div class="lb-stat"><div class="lb-stat-num">'98</div><div class="lb-stat-label">ফ্রান্স</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Ronaldo Nazário<span class="lb-flag">🇧🇷</span></div><div class="lb-detail">২ বার বিশ্বকাপজয়ী, ৩ বার ফিফা বর্ষসেরা</div></div><div class="lb-stat"><div class="lb-stat-num">×2</div><div class="lb-stat-label">ব্রাজিল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Kylian Mbappé<span class="lb-flag">🇫🇷</span></div><div class="lb-detail">২০১৮ বিশ্বকাপজয়ী, ফাইনালে হ্যাটট্রিক</div></div><div class="lb-stat"><div class="lb-stat-num">'18</div><div class="lb-stat-label">ফ্রান্স</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Kevin De Bruyne<span class="lb-flag">🇧🇪</span></div><div class="lb-detail">প্রিমিয়ার লিগের সর্বসেরা প্লেমেকার</div></div><div class="lb-stat"><div class="lb-stat-num">★</div><div class="lb-stat-label">বেলজিয়াম</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Erling Haaland<span class="lb-flag">🇳🇴</span></div><div class="lb-detail">প্রিমিয়ার লিগ এক মৌসুমে সর্বোচ্চ গোলের রেকর্ড</div></div><div class="lb-stat"><div class="lb-stat-num">36</div><div class="lb-stat-label">নরওয়ে</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.goal.com/en/lists" target="_blank">🔴 সর্বশেষ র‍্যাঙ্কিং — Goal.com →</a>
+
+    <h2 id="f-wc"><span class="h2-icon">🏆</span>বিশ্বকাপে সর্বাধিক গোলদাতা</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Miroslav Klose<span class="lb-flag">🇩🇪</span></div><div class="lb-country">জার্মানি</div></div><div class="lb-stat"><div class="lb-stat-num">16</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Ronaldo Nazário<span class="lb-flag">🇧🇷</span></div><div class="lb-country">ব্রাজিল</div></div><div class="lb-stat"><div class="lb-stat-num">15</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Gerd Müller<span class="lb-flag">🇩🇪</span></div><div class="lb-country">জার্মানি</div></div><div class="lb-stat"><div class="lb-stat-num">14</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Lionel Messi<span class="lb-flag">🇦🇷</span></div><div class="lb-country">আর্জেন্টিনা</div></div><div class="lb-stat"><div class="lb-stat-num">13</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Kylian Mbappé<span class="lb-flag">🇫🇷</span></div><div class="lb-country">ফ্রান্স</div></div><div class="lb-stat"><div class="lb-stat-num">13+</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Just Fontaine<span class="lb-flag">🇫🇷</span></div><div class="lb-country">ফ্রান্স</div></div><div class="lb-stat"><div class="lb-stat-num">13</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Pelé<span class="lb-flag">🇧🇷</span></div><div class="lb-country">ব্রাজিল</div></div><div class="lb-stat"><div class="lb-stat-num">12</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Sándor Kocsis<span class="lb-flag">🇭🇺</span></div><div class="lb-country">হাঙ্গেরি</div></div><div class="lb-stat"><div class="lb-stat-num">11</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Jürgen Klinsmann<span class="lb-flag">🇩🇪</span></div><div class="lb-country">জার্মানি</div></div><div class="lb-stat"><div class="lb-stat-num">11</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Helmut Rahn<span class="lb-flag">🇩🇪</span></div><div class="lb-country">জার্মানি</div></div><div class="lb-stat"><div class="lb-stat-num">10</div><div class="lb-stat-label">গোল</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup" target="_blank">🔴 সর্বশেষ আপডেট — FIFA.com →</a>
+
+    <h2 id="f-club"><span class="h2-icon">⚽</span>ক্লাব ফুটবলে সর্বাধিক গোলদাতা</h2>
+    <div class="leaderboard" data-table>
+      <div class="lb-row r1"><div class="lb-rank">1</div><div class="lb-info"><div class="lb-name">Cristiano Ronaldo<span class="lb-flag">🇵🇹</span></div><div class="lb-country">রিয়াল মাদ্রিদ / আল নাসর</div></div><div class="lb-stat"><div class="lb-stat-num">950+</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row r2"><div class="lb-rank">2</div><div class="lb-info"><div class="lb-name">Lionel Messi<span class="lb-flag">🇦🇷</span></div><div class="lb-country">বার্সেলোনা / ইন্টার মায়ামি</div></div><div class="lb-stat"><div class="lb-stat-num">850+</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row r3"><div class="lb-rank">3</div><div class="lb-info"><div class="lb-name">Romário<span class="lb-flag">🇧🇷</span></div><div class="lb-country">বার্সেলোনা / ভাস্কো দা গামা</div></div><div class="lb-stat"><div class="lb-stat-num">772</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">4</div><div class="lb-info"><div class="lb-name">Pelé<span class="lb-flag">🇧🇷</span></div><div class="lb-country">সান্তোস</div></div><div class="lb-stat"><div class="lb-stat-num">767</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">5</div><div class="lb-info"><div class="lb-name">Josef Bican<span class="lb-flag">🇨🇿</span></div><div class="lb-country">স্লাভিয়া প্রাহা</div></div><div class="lb-stat"><div class="lb-stat-num">759</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">6</div><div class="lb-info"><div class="lb-name">Ferenc Puskás<span class="lb-flag">🇭🇺</span></div><div class="lb-country">রিয়াল মাদ্রিদ</div></div><div class="lb-stat"><div class="lb-stat-num">746</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">7</div><div class="lb-info"><div class="lb-name">Robert Lewandowski<span class="lb-flag">🇵🇱</span></div><div class="lb-country">বায়ার্ন মিউনিখ / বার্সেলোনা</div></div><div class="lb-stat"><div class="lb-stat-num">650+</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">8</div><div class="lb-info"><div class="lb-name">Gerd Müller<span class="lb-flag">🇩🇪</span></div><div class="lb-country">বায়ার্ন মিউনিখ</div></div><div class="lb-stat"><div class="lb-stat-num">634</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">9</div><div class="lb-info"><div class="lb-name">Eusébio<span class="lb-flag">🇵🇹</span></div><div class="lb-country">বেনফিকা</div></div><div class="lb-stat"><div class="lb-stat-num">622</div><div class="lb-stat-label">গোল</div></div></div>
+      <div class="lb-row"><div class="lb-rank">10</div><div class="lb-info"><div class="lb-name">Karim Benzema<span class="lb-flag">🇫🇷</span></div><div class="lb-country">রিয়াল মাদ্রিদ / আল ইত্তিহাদ</div></div><div class="lb-stat"><div class="lb-stat-num">450+</div><div class="lb-stat-label">গোল</div></div></div>
+    </div>
+    <a class="live-link" href="https://www.transfermarkt.com/statistik/bestetorschuetzen" target="_blank">🔴 সর্বশেষ আপডেট — Transfermarkt →</a>
+
+  </div>
+
+</div>
+
+<footer>
+  📊 ডেটা সংকলিত — ক্যারিয়ার চলমান থাকা খেলোয়াড়দের পরিসংখ্যানের পাশে <strong>(+)</strong> চিহ্ন রয়েছে, যার মানে সংখ্যা বাড়তে পারে।<br>
+  সর্বশেষ ও লাইভ পরিসংখ্যানের জন্য প্রতিটি টেবিলের নিচের লিংকে ক্লিক করুন।
+</footer>
+
+<script>
+function openSchedule(type, url, title) {
+  var noEmbedSites = ['fifa.com', 'premierleague.com', 'laliga.com', 'uefa.com', 'icc-cricket.com', 'iplt20.com'];
+  var blocked = noEmbedSites.some(function(site){ return url.indexOf(site) > -1; });
+
+  var embedBox = document.getElementById(type + '-embed');
+  var iframe = document.getElementById(type + '-iframe');
+  var titleEl = document.getElementById(type + '-embed-title');
+
+  if(blocked) {
+    window.open(url, '_blank');
+    return;
+  }
+
+  titleEl.textContent = title;
+  iframe.src = url;
+  embedBox.classList.add('show');
+  setTimeout(function(){ embedBox.scrollIntoView({behavior:'smooth', block:'center'}); }, 150);
+}
+
+function closeSchedule(type) {
+  var embedBox = document.getElementById(type + '-embed');
+  var iframe = document.getElementById(type + '-iframe');
+  embedBox.classList.remove('show');
+  setTimeout(function(){ iframe.src = ''; }, 400);
+}
+
+function showCat(cat, btn) {
+  document.querySelectorAll('.cat-section').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(cat + '-section').classList.add('active');
+  document.querySelectorAll('.cat-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function filterPlayers(input, sectionId) {
+  var query = input.value.trim().toLowerCase();
+  var section = document.getElementById(sectionId);
+  var rows = section.querySelectorAll('.lb-row');
+  rows.forEach(function(row){
+    var name = row.querySelector('.lb-name').textContent.toLowerCase();
+    row.style.display = name.indexOf(query) > -1 ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
